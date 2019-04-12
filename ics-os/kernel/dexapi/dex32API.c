@@ -28,6 +28,12 @@ int dex32_getversion(){
    return DEX32_OSVER;
 };
 
+int kchown(int fd, int uid, int gid){
+printf("Changing owner of fd=%d to user id=%d and group id=%d\n", fd, uid, gid);
+//Actual code to change file ownership is placed here.
+return 0; //0-success
+}
+
 int api_addsystemcall(DWORD function_number, void *function_ptr, 
                         DWORD access_check, DWORD flags){
 
@@ -176,6 +182,7 @@ void api_init(){
    api_addsystemcall(0x9E,write_char,0,0);
    api_addsystemcall(0x9F,env_getenv,0,0);
    api_addsystemcall(0xA0,env_setenv,0,0);
+   api_addsystemcall(0x9F, kchown, 0, 0);
 };
 
 
